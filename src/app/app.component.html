@@ -1,0 +1,60 @@
+<div class="todo-component-container">
+  <form (keydown)="AddItem($event)">
+    <div class="input-container">
+      <label for="add-item-text" id="add-item-label"><h3>Add item:</h3></label>
+      <input type="text" id="add-item-text" autocomplete="off">
+    </div>
+  </form>
+  
+  <div class="lists-container">
+    <div cdkDropListGroup>
+      <div class="list-container">
+        <h2>To Do</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="todo"
+          class="item-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="item-box" *ngFor="let item of todo; let index = index;" cdkDrag>
+            {{item}}
+            <p (click)="DeleteItemFromList(index, todo)"><b>x</b></p>
+          </div>
+          <p *ngIf="todo.length === 0">No items remaining 🥳</p>
+        </div>
+      </div>
+    
+      <div class="list-container">
+        <h2>In Progress</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="inProgress"
+          class="item-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="item-box" *ngFor="let item of inProgress; let index = index;" cdkDrag>
+            {{item}}
+            <p (click)="DeleteItemFromList(index, inProgress)"><b>x</b></p>
+          </div>
+          <p *ngIf="inProgress.length === 0">No items remaining 🥱</p>
+        </div>
+      </div>
+    
+      <div class="list-container">
+        <h2>Done</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="done"
+          class="item-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="item-box" *ngFor="let item of done; let index = index" cdkDrag>
+            {{item}}
+            <p (click)="DeleteItemFromList(index, done)"><b>x</b></p>
+          </div>
+          <p *ngIf="done.length === 0">No items remaining 😰</p>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
